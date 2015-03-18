@@ -1,0 +1,21 @@
+{
+  "name": "f-react-kit",
+  "version": "1.0.0",
+  "description": "Functional React application starter kit",
+  "author": "Roman Liutikov <roman01la@romanliutikov.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "NODE_ENV=dev node dev-server.js"
+  },
+  "devDependencies": {
+    "babel-core": "^4.7.12",
+    "babel-loader": "^4.2.0",
+    "babel-runtime": "^4.7.12",
+    "mori": "^0.3.2",
+    "ramda": "^0.11.0",
+    "react": "^0.13.0",
+    "react-hot-loader": "^1.2.3",
+    "webpack": "^1.7.3",
+    "webpack-dev-server": "^1.7.0"
+  }
+}
