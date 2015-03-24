@@ -27,9 +27,12 @@ class App extends React.Component {
 
         let list = r.mapIndexed((item, index) => {
 
-            return <Item key={index}
+            return (
+
+                <Item key={index}
                          index={index}
                          item={item} />
+            );
 
         }, Store.getItems());
 

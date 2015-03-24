@@ -7,7 +7,7 @@ new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     hot: true
 })
-.listen(config.port, config.address, function (err, result) {
+.listen(config.port, config.address, function (err) {
 
   if (err) { console.log(err); }
 

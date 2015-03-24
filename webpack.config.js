@@ -1,4 +1,6 @@
-var webpack = require('webpack');
+var webpack = require('webpack'),
+    path = require('path'),
+    AnybarWebpackPlugin = require('anybar-webpack');
 
 const ADDRESS = '0.0.0.0';
 const PORT = 3000;
@@ -12,7 +14,7 @@ module.exports = {
     entry: [
         'webpack-dev-server/client?http://' + ADDRESS + ':' + PORT,
         'webpack/hot/only-dev-server',
-        __dirname + '/src/app.jsx'
+        path.join(__dirname, '/src/app.jsx')
     ],
     module: {
         loaders: [
@@ -20,7 +22,7 @@ module.exports = {
         ]
     },
     output: {
-        path: __dirname + '/',
+        path: path.join(__dirname, '/'),
         filename: 'app.js',
         publicPath: '/'
     },
@@ -29,6 +31,7 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        new AnybarWebpackPlugin()
     ]
 };

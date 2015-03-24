@@ -9,7 +9,10 @@ function register (event, fn) {
 function dispatch (event, ...args) {
 
     let eventListeners = listeners[event];
-    for (let i = eventListeners.length; i-- > 0;) eventListeners[i].apply(null, args);
+    for (let i = eventListeners.length; i-- > 0; ) {
+
+        eventListeners[i].apply(null, args);
+    }
 }
 
 export default {

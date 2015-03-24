@@ -3,6 +3,11 @@ import _ from 'mori';
 let listeners = [],
     state;
 
+function getState() {
+
+  return state;
+}
+
 function wrap (op, args) {
 
   return _[op].apply(_, [getState()].concat(args));
@@ -15,7 +20,10 @@ function addChangeListener (fn) {
 
 function emitChange() {
 
-    for (let i = listeners.length; i-- > 0;) listeners[i]();
+    for (let i = listeners.length; i-- > 0; ) {
+
+        listeners[i]();
+    }
 }
 
 function silentSwap (nextState) {
@@ -27,11 +35,6 @@ function swap (nextState) {
 
     silentSwap(nextState);
     emitChange();
-}
-
-function getState() {
-
-  return state;
 }
 
 function getIn (...args) {
