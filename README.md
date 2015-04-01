@@ -1,6 +1,7 @@
 # f-react-kit
 
 React application development setup which encourages usage of **global immutable state** and **functional programming style**.
+I've been introduced to this concept by awesome devs at [Redradix](http://redradix.com/).
 
 ## Usage
 
