@@ -5,7 +5,8 @@
   "author": "Roman Liutikov <roman01la@romanliutikov.com>",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=dev node dev-server.js"
+    "start": "NODE_ENV=dev node dev-server.js",
+    "dev": "mocha --require babel/register --watch"
   },
   "devDependencies": {
     "babel": "^5.0.8",
@@ -13,8 +14,12 @@
     "babel-eslint": "^2.0.2",
     "babel-loader": "^5.0.0",
     "babel-runtime": "^5.0.8",
+    "coveralls": "^2.11.2",
     "eslint": "^0.18.0",
+    "eslint-plugin-mocha": "^0.2.2",
     "eslint-plugin-react": "^2.0.2",
+    "mocha": "^2.2.1",
+    "mocha-lcov-reporter": "0.0.2",
     "mori": "^0.3.2",
     "ramda": "^0.13.0",
     "react": "^0.13.1",
