@@ -18,7 +18,8 @@ module.exports = {
     ],
     module: {
         loaders: [
-            { test: /\.(jsx|es6)$/, exclude: /node_modules/, loaders: ['react-hot', 'babel-loader?optional=runtime&stage=0'] }
+            { test: /\.(jsx|es6)$/, exclude: /node_modules/,
+                loaders: ['react-hot', 'babel-loader?optional=runtime&stage=0&cacheDirectory=true'] }
         ]
     },
     output: {
