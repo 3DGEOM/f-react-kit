@@ -12,10 +12,12 @@ import r from 'ramda';
 
 class App extends React.Component {
 
-    constructor() {
+    state = { atom: atom.getState() };
 
+    constructor (props) {
+
+        super(props);
         atom.silentSwap(_.toClj(initial));
-        this.state = { atom: atom.getState() };
     }
 
     componentWillMount() {
