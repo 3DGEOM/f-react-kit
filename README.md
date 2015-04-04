@@ -1,3 +1,5 @@
+[![Dependency Status](https://gemnasium.com/roman01la/f-react-kit.svg)](https://gemnasium.com/roman01la/f-react-kit)
+
 # f-react-kit
 
 React application development setup which encourages usage of **global immutable state** and **functional programming style**.
