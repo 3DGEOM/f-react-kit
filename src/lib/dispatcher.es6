@@ -6,6 +6,13 @@ function register (event, fn) {
     listeners[event].push(fn);
 }
 
+function remove (event, fn) {
+
+    let handlers = listeners[event];
+
+    handlers.splice(handlers.indexOf(fn), 1);
+}
+
 function dispatch (event, ...args) {
 
     let eventListeners = listeners[event];
@@ -15,8 +22,23 @@ function dispatch (event, ...args) {
     }
 }
 
+function getEventHandlers (event) {
+
+    return listeners[event];
+}
+
+function clearEventHandlers (event) {
+
+    event ?
+        (listeners[event] = []) :
+        (listeners = {});
+}
+
 export default {
 
     register,
-    dispatch
+    remove,
+    dispatch,
+    getEventHandlers,
+    clearEventHandlers
 };

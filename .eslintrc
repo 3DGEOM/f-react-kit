@@ -16,6 +16,7 @@
     "rules": {
         "quotes": [2, "single", "avoid-escape"],
         "strict": 0,
+        "no-unused-expressions": false,
 
         "react/display-name": 0,
         "react/jsx-quotes": 1,
