@@ -18,6 +18,21 @@ function addChangeListener (fn) {
     listeners.push(fn);
 }
 
+function removeChangeListener (fn) {
+
+    listeners.splice(listeners.indexOf(fn), 1);
+}
+
+function getChangeListeners() {
+
+    return listeners;
+}
+
+function clearChangeListeners() {
+
+    listeners = [];
+}
+
 function emitChange() {
 
     for (let i = listeners.length; i-- > 0; ) {
@@ -50,6 +65,9 @@ function assocIn (...args) {
 export default {
 
     addChangeListener,
+    removeChangeListener,
+    getChangeListeners,
+    clearChangeListeners,
     silentSwap,
     swap,
     getState,
