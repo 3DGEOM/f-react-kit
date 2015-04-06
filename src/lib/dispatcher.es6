@@ -29,9 +29,7 @@ function getEventHandlers (event) {
 
 function clearEventHandlers (event) {
 
-    event ?
-        (listeners[event] = []) :
-        (listeners = {});
+    event ? (listeners[event] = []) : false;
 }
 
 export default {
