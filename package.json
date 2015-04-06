@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=dev node dev-server.js",
-    "dev": "mocha test/**/*.es6 -r babel/register -w --watch-extensions es6",
-    "test": "isparta cover _mocha --include src/**/*.es6 --report lcovonly -- test/**/*.es6 -r babel/register && cat ./coverage/lcov.info | coveralls && rm -r ./coverage"
+    "dev": "mocha test/**/*.es6 test/**/*.jsx -r babel/register -w --watch-extensions es6,jsx",
+    "test": "isparta cover _mocha --include src/**/*.es6 src/**/*.jsx --report lcovonly -- test/**/*.es6 test/**/*.jsx -r babel/register && cat ./coverage/lcov.info | coveralls && rm -r ./coverage"
   },
   "devDependencies": {
     "babel": "^5.0.8",
@@ -21,7 +21,9 @@
     "eslint-plugin-react": "^2.0.2",
     "isparta": "roman01la/isparta#include-opt",
     "istanbul": "^0.3.13",
+    "jsdom": "^4.1.0",
     "mocha": "^2.2.1",
+    "mocha-jsdom": "^0.3.0",
     "mocha-lcov-reporter": "0.0.2",
     "mori": "^0.3.2",
     "ramda": "^0.13.0",
