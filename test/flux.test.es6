@@ -2,7 +2,6 @@ import assert from 'assert';
 
 import _ from 'mori';
 
-import Store from '../src/stores/store';
 import Dispatcher from '../src/lib/dispatcher';
 import atom from '../src/state/atom';
 
