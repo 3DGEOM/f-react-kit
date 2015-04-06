@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import dispatcher from '../src/lib/dispatcher';
+import Dispatcher from '../src/lib/dispatcher';
 
 let noop = () => null,
     noop1 = () => null,
@@ -9,15 +9,15 @@ let noop = () => null,
 
 describe('Dispatcher', () => {
 
-    afterEach(() => dispatcher.clearEventHandlers());
+    afterEach(() => Dispatcher.clearEventHandlers());
 
     describe('register(event, fn)', () => {
 
         it('should register event handler', () => {
 
-            dispatcher.register(eventName, noop);
+            Dispatcher.register(eventName, noop);
 
-            assert.equal(noop, dispatcher.getEventHandlers(eventName)[0]);
+            assert.equal(noop, Dispatcher.getEventHandlers(eventName)[0]);
         });
     });
 
@@ -25,10 +25,10 @@ describe('Dispatcher', () => {
 
         it('should remove event handler', () => {
 
-            dispatcher.register(eventName, noop);
-            dispatcher.remove(eventName, noop);
+            Dispatcher.register(eventName, noop);
+            Dispatcher.remove(eventName, noop);
 
-            assert.equal(dispatcher.getEventHandlers(eventName).length, 0);
+            assert.equal(Dispatcher.getEventHandlers(eventName).length, 0);
         });
     });
 
@@ -36,12 +36,12 @@ describe('Dispatcher', () => {
 
         it('should dispatch event', () => {
 
-            dispatcher.register(eventName, (inPayload) => {
+            Dispatcher.register(eventName, (inPayload) => {
 
                 assert.equal(inPayload, payload);
             });
 
-            dispatcher.dispatch(eventName, payload);
+            Dispatcher.dispatch(eventName, payload);
         });
     });
 
@@ -49,10 +49,10 @@ describe('Dispatcher', () => {
 
         it('should get event handlers', () => {
 
-            dispatcher.register(eventName, noop);
-            dispatcher.register(eventName, noop1);
+            Dispatcher.register(eventName, noop);
+            Dispatcher.register(eventName, noop1);
 
-            assert.equal(dispatcher.getEventHandlers(eventName).length, 2);
+            assert.equal(Dispatcher.getEventHandlers(eventName).length, 2);
         });
     });
 
@@ -60,18 +60,18 @@ describe('Dispatcher', () => {
 
         it('should clear event handlers', () => {
 
-            dispatcher.register(eventName, noop);
-            dispatcher.clearEventHandlers();
+            Dispatcher.register(eventName, noop);
+            Dispatcher.clearEventHandlers();
 
-            assert.ok(typeof dispatcher.getEventHandlers(eventName) === 'undefined');
+            assert.ok(typeof Dispatcher.getEventHandlers(eventName) === 'undefined');
         });
 
         it('should clear event handlers of type', () => {
 
-            dispatcher.register(eventName, noop);
-            dispatcher.clearEventHandlers(eventName);
+            Dispatcher.register(eventName, noop);
+            Dispatcher.clearEventHandlers(eventName);
 
-            assert.equal(dispatcher.getEventHandlers(eventName).length, 0);
+            assert.equal(Dispatcher.getEventHandlers(eventName).length, 0);
         });
     });
 });
