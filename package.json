@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=dev node dev-server.js",
-    "dev": "mocha test/**/*.es6 -r babel/register -w",
+    "dev": "mocha test/**/*.es6 -r babel/register -w --watch-extensions es6",
     "test": "isparta cover _mocha --include src/**/*.es6 --report lcovonly -- test/**/*.es6 -r babel/register && cat ./coverage/lcov.info | coveralls && rm -r ./coverage"
   },
   "devDependencies": {
