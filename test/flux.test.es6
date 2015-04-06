@@ -23,10 +23,16 @@ describe('Flux', () => {
 
     describe('Data flow', () => {
 
-        it('atom should update', () => {
+        afterEach(() => atom.clearChangeListeners());
+
+        it('atom should update', done => {
 
             atom.silentSwap(state);
-            atom.addChangeListener(() => assert.ok(_.equals(atom.getState(), newState)));
+            atom.addChangeListener(() => {
+
+                assert.ok(_.equals(atom.getState(), newState));
+                done();
+            });
 
             Dispatcher.register('UPDATE', payload => atom.swap(payload));
             Dispatcher.dispatch('UPDATE', newState);
