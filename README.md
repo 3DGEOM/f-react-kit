@@ -1,4 +1,5 @@
 [![Dependency Status](https://gemnasium.com/roman01la/f-react-kit.svg)](https://gemnasium.com/roman01la/f-react-kit)
+[![Coverage Status](https://coveralls.io/repos/roman01la/f-react-kit/badge.svg)](https://coveralls.io/r/roman01la/f-react-kit)
 
 # f-react-kit
 
