@@ -9,7 +9,7 @@ let noop = () => null,
 
 describe('Dispatcher', () => {
 
-    afterEach(() => Dispatcher.clearEventHandlers());
+    afterEach(() => Dispatcher.clearEventHandlers(eventName));
 
     describe('register(event, fn)', () => {
 
@@ -57,14 +57,6 @@ describe('Dispatcher', () => {
     });
 
     describe('clearEventHandlers(event?)', () => {
-
-        it('should clear event handlers', () => {
-
-            Dispatcher.register(eventName, noop);
-            Dispatcher.clearEventHandlers();
-
-            assert.ok(typeof Dispatcher.getEventHandlers(eventName) === 'undefined');
-        });
 
         it('should clear event handlers of type', () => {
 
