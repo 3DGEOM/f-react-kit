@@ -20,6 +20,13 @@ $ npm start
 
 ![data flow in f-react-kit](flow.png)
 
+- Put initial state into the atom (only on initial render) →
+- Pass atom down the components tree as a property →
+- When reading data: apply store method to a copy of the atom received as a property →
+- When writing: dispatch an action via dispacther →
+- Update atom from within the store →
+- Repeat ↩
+
 ## Concepts
 
 ### Global immutable state
