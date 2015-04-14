@@ -16,6 +16,10 @@ $ npm i
 $ npm start
 ```
 
+## Data flow
+
+![data flow in f-react-kit](flow.png)
+
 ## Concepts
 
 ### Global immutable state
