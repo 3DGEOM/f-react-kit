@@ -2,21 +2,27 @@ import React from 'react';
 
 import Dispatcher from '../lib/dispatcher';
 
-function toggleSelect (item, index) {
+function toggleSelect (index, selected) {
 
-  item.selected = !item.selected;
-  Dispatcher.dispatch('UPDATE_ITEM', item, index);
+    Dispatcher.dispatch('ITEM:TOGGLE_SELECT', index, selected);
 }
 
 class Item extends React.Component {
 
+    static propTypes = {
+
+        item: React.PropTypes.object,
+        index: React.PropTypes.number
+    }
+
     render() {
 
-        let item = this.props.item;
+        let item = this.props.item,
+            index = this.props.index;
 
         return (
 
-            <li onClick={toggleSelect.bind(null, item, this.props.index)}>
+            <li onClick={toggleSelect.bind(null, index, item.selected)}>
 
                 {item.name}
                 {item.selected ? '✔' : null}

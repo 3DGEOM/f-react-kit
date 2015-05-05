@@ -14,16 +14,14 @@ function getItems() {
     return _.toJs(atom.getIn(cursor.items));
 }
 
-function updateItem (item, index) {
+function toggleSelect (index, selected) {
 
-  let items = getItems();
-  items[index] = item;
-  atom.assocIn(cursor.items, items);
+    atom.assocIn(cursor.items.concat([index, 'selected']), !selected);
 }
 
-Dispatcher.register('UPDATE_ITEM', updateItem);
+Dispatcher.register('ITEM:TOGGLE_SELECT', toggleSelect);
 
 export default {
 
-  getItems
+    getItems
 };

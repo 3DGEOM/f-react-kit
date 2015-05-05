@@ -5,12 +5,12 @@ let listeners = [],
 
 function getState() {
 
-  return state;
+    return state;
 }
 
 function wrap (op, args) {
 
-  return _[op].apply(_, [getState()].concat(args));
+    return _[op].apply(_, [getState()].concat(args));
 }
 
 function addChangeListener (fn) {

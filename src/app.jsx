@@ -1,48 +1,18 @@
 import React from 'react';
 
-import atom from './state/atom';
-import initial from './state/initial';
+import atomComponent from './lib/atom-component';
+import initialState from './state/initial';
 
-import Store from './stores/store';
-
-import Item from './components/item';
-
-import _ from 'mori';
-import r from 'ramda';
+import List from './components/list';
 
 class App extends React.Component {
 
-    state = { atom: atom.getState() };
-
-    constructor (props) {
-
-        super(props);
-        atom.silentSwap(_.toClj(initial));
-    }
-
-    componentWillMount() {
-
-        atom.addChangeListener(() => this.setState({ atom: atom.getState() }));
-    }
-
     render() {
 
-        let list = r.mapIndexed((item, index) => {
-
-            return (
-
-                <Item key={index}
-                         index={index}
-                         item={item} />
-            );
-
-        }, Store.getItems());
-
-        return (
-
-            <ul>{list}</ul>
-        );
+        return <List />;
     }
 }
 
-React.render(<App />, document.body);
+let RootApp = atomComponent(App, initialState);
+
+React.render(<RootApp />, document.body);
