@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Input from './input';
+import protonComponent from '../lib/components/proton-component';
 
 import Dispatcher from '../lib/dispatcher';
 
@@ -10,6 +10,11 @@ let updateInput = _.partial(Dispatcher.dispatch, 'TODOS:UPDATE_INPUT');
 let createToDo = _.partial(Dispatcher.dispatch, 'TODOS:CREATE');
 
 class Header extends React.Component {
+
+    static propTypes = {
+
+        protonState: React.PropTypes.string
+    }
 
     _onNewToDoChange (event) {
 
@@ -32,10 +37,10 @@ class Header extends React.Component {
 
             <header className='header'>
                 <h1>todos</h1>
-                <Input className='new-todo'
+                <input className='new-todo'
                        placeholder='What needs to be done?'
+                       value={this.props.protonState}
                        autoFocus={true}
-                       cursor={['newToDo']}
                        onChange={this._onNewToDoChange}
                        onKeyDown={this._createToDo} />
             </header>
@@ -43,4 +48,4 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+export default protonComponent(Header);

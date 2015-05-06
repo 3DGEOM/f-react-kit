@@ -24,7 +24,7 @@ class ToDoApp extends React.Component {
 
             <div>
                 <section className='todoapp'>
-                    <Header />
+                    <Header cursor={['newToDo']} />
                     {hasPageItems ? <Main /> : null}
                     {hasAnyItems ? <Footer {...footerProps} /> : null}
                 </section>
