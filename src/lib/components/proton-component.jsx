@@ -22,10 +22,10 @@ let protonComponent = function (Component) {
         /* Re-render component if proton state has been changed
            and update proton state
         */
-        shouldComponentUpdate() {
+        shouldComponentUpdate (nextProps) {
 
             let currentProton = this._protonState,
-                nextProton = atom.getIn(this.props.cursor);
+                nextProton = atom.getIn(nextProps.cursor);
 
             if (_.equals(currentProton, nextProton)) {
 
