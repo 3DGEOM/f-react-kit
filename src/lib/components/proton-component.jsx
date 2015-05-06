@@ -39,14 +39,14 @@ let protonComponent = function (Component) {
         }
 
         /* Get data as plain JS data structure */
-        getProtonState() {
+        _getProtonState() {
 
             return _.toJs(this._protonState);
         }
 
         render() {
 
-            return <Component protonState={this.getProtonState()} {...this.props} />;
+            return <Component protonState={this._getProtonState()} {...this.props} />;
         }
     }
 
