@@ -1,18 +1,29 @@
 import React from 'react';
 
-import atomComponent from './lib/atom-component';
+import atomComponent from './lib/components/atom-component';
 import initialState from './state/initial';
 
-import List from './components/list';
+import ToDoApp from './components/todo-app';
 
-class App extends React.Component {
+import ToDoItemsStore from './stores/todo-items-store';
+import { dispatch } from './lib/dispatcher';
+import { flip } from './lib/functions';
 
-    render() {
+import page from 'page';
+import _ from 'mori';
 
-        return <List />;
-    }
-}
+let addRoute = _.partial(flip(page), _.comp(
 
-let RootApp = atomComponent(App, initialState);
+    _.partial(dispatch, 'PAGE:SET_CURRENT_PAGE'),
+    _.partial((prop, obj) => obj[prop], 'path')
+));
 
-React.render(<RootApp />, document.body);
+addRoute('/');
+addRoute('/all');
+addRoute('/active');
+addRoute('/completed');
+page(ToDoItemsStore.getCurrentPage());
+
+let AtomToDoApp = atomComponent(ToDoApp, initialState);
+
+React.render(<AtomToDoApp />, document.body);

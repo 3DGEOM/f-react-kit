@@ -1,6 +1,6 @@
 import React from 'react';
 
-import atom from '../state/atom';
+import atom from '../../state/atom';
 
 import _ from 'mori';
 

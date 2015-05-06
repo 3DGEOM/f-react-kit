@@ -1,17 +1,22 @@
 import React from 'react';
 
-import atom from '../state/atom';
+import atom from '../../state/atom';
 
 import _ from 'mori';
 
-let protonComponent = function (Component, cursorName, cursorPath) {
+let protonComponent = function (Component) {
 
     class ProtonComponent extends React.Component {
+
+        static propTypes = {
+
+            cursor: React.PropTypes.arrayOf(React.PropTypes.any)
+        }
 
         /* Set initial proton state */
         componentWillMount() {
 
-            this._protonState = atom.getIn(cursorPath);
+            this._protonState = atom.getIn(this.props.cursor);
         }
 
         /* Re-render component if proton state has been changed
@@ -20,7 +25,7 @@ let protonComponent = function (Component, cursorName, cursorPath) {
         shouldComponentUpdate() {
 
             let currentProton = this._protonState,
-                nextProton = atom.getIn(cursorPath);
+                nextProton = atom.getIn(this.props.cursor);
 
             if (_.equals(currentProton, nextProton)) {
 
@@ -41,8 +46,7 @@ let protonComponent = function (Component, cursorName, cursorPath) {
 
         render() {
 
-            let protonState = { [cursorName]: this.getProtonState() };
-            return <Component protonState={protonState} {...this.props} />;
+            return <Component protonState={this.getProtonState()} {...this.props} />;
         }
     }
 

@@ -62,6 +62,11 @@ function assocIn (...args) {
     return swap(wrap('assocIn', args));
 }
 
+function updateIn (...args) {
+
+    return swap(wrap('updateIn', args));
+}
+
 export default {
 
     addChangeListener,
@@ -72,5 +77,6 @@ export default {
     swap,
     getState,
     getIn,
-    assocIn
+    assocIn,
+    updateIn
 };
