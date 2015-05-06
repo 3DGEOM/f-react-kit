@@ -1,6 +1,7 @@
 import React from 'react';
 
-import ToDoItemsStore from '../stores/todo-items-store';
+import pureComponent from '../lib/components/pure-component';
+
 import Dispatcher from '../lib/dispatcher';
 
 import { pluralize } from '../lib/functions';
@@ -16,6 +17,13 @@ let footerLinksMap = {
 
 class Footer extends React.Component {
 
+    static propTypes = {
+
+        currentPage: React.PropTypes.string,
+        isAnyCompleted: React.PropTypes.bool,
+        uncompleted: React.PropTypes.number
+    }
+
     _onClear() {
 
         Dispatcher.dispatch('TODOS:REMOVE_COMPLETED');
@@ -23,10 +31,12 @@ class Footer extends React.Component {
 
     render() {
 
-        let itemsLeft = ToDoItemsStore.countUncompleted(),
+        let props = this.props;
+
+        let itemsLeft = props.uncompleted,
             itemsLeftText = <strong>{itemsLeft}</strong>,
             maybePluralItem = pluralize('item', itemsLeft),
-            currentPage = ToDoItemsStore.getCurrentPage();
+            currentPage = props.currentPage;
 
         let footerLinks = r.mapIndexed((path, index) => {
 
@@ -56,10 +66,10 @@ class Footer extends React.Component {
             <footer className='footer'>
                 <span className='todo-count'>{itemsLeftText} {maybePluralItem} left</span>
                 <ul className='filters'>{footerLinks}</ul>
-                {ToDoItemsStore.isAnyCompleted() ? clearBtn : null}
+                {props.isAnyCompleted ? clearBtn : null}
             </footer>
         );
     }
 }
 
-export default Footer;
+export default pureComponent(Footer);

@@ -13,13 +13,20 @@ class ToDoApp extends React.Component {
         let hasPageItems = !!ToDoItemsStore.getPageItems().length,
             hasAnyItems = !!ToDoItemsStore.getAllItems().length;
 
+        let footerProps = {
+
+            currentPage: ToDoItemsStore.getCurrentPage(),
+            isAnyCompleted: ToDoItemsStore.isAnyCompleted(),
+            uncompleted: ToDoItemsStore.countUncompleted()
+        };
+
         return (
 
             <div>
                 <section className='todoapp'>
                     <Header />
                     {hasPageItems ? <Main /> : null}
-                    {hasAnyItems ? <Footer /> : null}
+                    {hasAnyItems ? <Footer {...footerProps} /> : null}
                 </section>
                 <footer className='info'>
                     <p>Double-click to edit a todo</p>
