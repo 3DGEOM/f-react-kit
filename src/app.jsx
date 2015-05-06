@@ -24,6 +24,6 @@ addRoute('/active');
 addRoute('/completed');
 page(ToDoItemsStore.getCurrentPage());
 
-let AtomToDoApp = atomComponent(ToDoApp, initialState);
+let AtomicToDoApp = atomComponent(ToDoApp, initialState);
 
-React.render(<AtomToDoApp />, document.body);
+React.render(<AtomicToDoApp />, document.body);
