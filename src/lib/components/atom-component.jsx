@@ -2,9 +2,7 @@ import React from 'react';
 
 import atom from '../../state/atom';
 
-import _ from 'mori';
-
-let atomComponent = function (Component, initialState) {
+let atomComponent = function (Component, initialState, updateCallback) {
 
     class Root extends React.Component {
 
@@ -13,13 +11,19 @@ let atomComponent = function (Component, initialState) {
             super(props);
 
             /* Bootsrap applicaion state */
-            atom.silentSwap(_.toClj(initialState));
+            atom.silentSwap(initialState);
         }
 
         componentWillMount() {
 
-            /* Re-render application on atom state change */
-            atom.addChangeListener(() => this.forceUpdate());
+            /* Re-render application on atom state change
+               and fire a callback with reference to the atom state
+            */
+            atom.addChangeListener(() => {
+
+                updateCallback(atom.getState());
+                this.forceUpdate();
+            });
         }
 
         render() {
