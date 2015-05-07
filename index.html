@@ -9,18 +9,164 @@
     body {
       margin: 0;
       font: normal 22px sans-serif;
+      text-rendering: optimizeLegibility;
+      color: #242424;
+      background: #fafafa;
     }
+    a { color: #242424; }
+    a:hover,
+    a:focus { color: #61dafb; }
+    h3 { margin: 0.5em 0; }
+    h4 { margin: 1.5em 0 0.5em; }
+    code {
+      font-size: 0.9em;
+      background: #dadada;
+      padding: 0 6px;
+      border-radius: 2px;
+    }
+    small { font-size: 0.7em; }
+
     .page-header {
       margin: 30px 0 10px;
       text-align: center;
+    }
+    .logo {
+      display: block;
+      margin: 10px auto;
+    }
+
+    .content {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
+
+    .separator {
+      margin: 0 auto;
+      width: 60%;
+      height: 1px;
+      background: #242424;
+    }
+
+    .page-footer {
+      text-align: center;
+      padding: 10px 0;
+      margin: 100px 0 0;
     }
   </style>
 </head>
 <body>
 
   <header class="page-header">
-    <a href="https://github.com/roman01la/f-react-kit">f-react-kit</a>
+    <h1><a href="https://github.com/roman01la/f-react-kit">f-react-kit</a></h1>
+    <h3>Lightweight nuclear physics for React</h3>
   </header>
+
+  <main class="content">
+    <svg class="logo" width="300" height="355">
+      <g class="atom">
+        <circle r="60" cx="150" cy="100" fill="#242424"></circle>
+        <circle r="40" cx="150" cy="100" fill="#e45308"></circle>
+      </g>
+      <line x1="150" y1="158" x2="150" y2="210" stroke="#242424" stroke-width="4"></line>
+      <g class="stores">
+        <circle r="84" cx="150" cy="100" fill="transparent" stroke-width="10" stroke="#242424"></circle>
+        <circle r="16" cx="66" cy="100" fill="#242424"></circle>
+        <circle r="16" cx="234" cy="100" fill="#242424"></circle>
+      </g>
+      <g class="components">
+        <circle class="root" r="30" cx="150" cy="240" fill="#e45308" stroke="#242424" stroke-width="6"></circle>
+        <circle r="20" cx="80" cy="300" fill="#fafafa" stroke="#242424" stroke-width="4"></circle>
+        <circle r="20" cx="150" cy="320" fill="#61dafb" stroke="#242424" stroke-width="4"></circle>
+        <circle r="20" cx="220" cy="300" fill="#ab6fec" stroke="#242424" stroke-width="4"></circle>
+      </g>
+    </svg>
+    <article class="entry">
+      <p><strong>f-react-kit</strong> is a set of an opinionated concepts and tools
+        for building better applications with React. It takes inspiration from
+        Clojure’s <a href="http://clojure.org/atoms" target="blank_">atoms</a> and
+        Om’s <a href="https://github.com/omcljs/om/wiki/Cursors" target="blank_">cursors</a>,
+        and embraces functional programming style.</p>
+      <p>The real goal is to show a possibly better way of doing
+        things with React. This is WIP and any contribution is welcome!</p>
+      <div class="separator"></div>
+      <p>A single global immutable state is a basic piece here.
+        Immutability of the data is a safe point for applications of any scale,
+        and functional programming style is what makes it easier to reason about the code.</p>
+
+      <h4>How it works</h4>
+      <p>
+        <svg width="200" height="200" style="float:right;margin:-40px 0 0;">
+          <g class="atom">
+            <circle r="60" cx="100" cy="100" fill="#242424"></circle>
+            <circle r="40" cx="100" cy="100" fill="#e45308"></circle>
+          </g>
+          <g class="stores">
+            <circle r="84" cx="100" cy="100" fill="transparent" stroke-width="10" stroke="#242424"></circle>
+            <circle r="16" cx="16" cy="100" fill="#242424"></circle>
+            <circle r="16" cx="184" cy="100" fill="#242424"></circle>
+          </g>
+        </svg>
+        The <strong>atom</strong> is a single source of truth, which holds an <strong>immutable state</strong>
+        and exposes a basic API to manipulate the data and listen for changes.
+      </p>
+      <p>A <strong>store</strong> provides a more specific API for writes,
+        via dispatcher, and reads, via exposed functions,
+        using <strong>cursors</strong>. It doesn’t store the actual data.</p>
+      <p>
+        <svg width="70" height="70" style="float:left;margin:0 15px 0 0;">
+          <circle class="root" r="30" cx="35" cy="35" fill="#e45308" stroke="#242424" stroke-width="6"></circle>
+        </svg>
+        To reduce complexity, there’s <strong>no local state</strong> within any React components.
+        Everytime the <strong>application state</strong> is changed, the <strong>atom</strong> will trigger
+        an update on the root and re-render component tree.
+        This functionality is achieved with a special higher-order component
+        <a href="https://github.com/roman01la/f-react-kit/blob/master/src/lib/components/atom-component.jsx" target="blank_">atomComponent</a>.</p>
+      <p>In order to simplify state management across entire component tree and render efficiently
+        there are three special higher-order components are introduced.</p>
+      <p>
+        <svg width="48" height="48" style="float:right;margin:-10px 0 0;">
+          <circle r="20" cx="24" cy="24" fill="#fafafa" stroke="#242424" stroke-width="4"></circle>
+        </svg>
+        <a href="https://github.com/roman01la/f-react-kit/blob/master/src/lib/components/pure-component.jsx" target="blank_">pureComponent</a>
+        consumes data passed down via <strong>props</strong>
+        and implements <code>shouldComponentUpdate</code> with a <strong>shallow comparator</strong>.
+        Incoming data is often the result of calling a <strong>read</strong> operation on the <strong>store</strong>,
+        which does <strong>transform data</strong>.
+      </p>
+      <p>
+        <svg width="48" height="48" style="float:right;margin:-10px 0 0;">
+          <circle r="20" cx="24" cy="24" fill="#61dafb" stroke="#242424" stroke-width="4"></circle>
+        </svg>
+        <a href="https://github.com/roman01la/f-react-kit/blob/master/src/lib/components/proton-component.jsx" target="blank_">protonComponent</a>
+        accepts a <strong>single cursor</strong> and
+        is used when consuming data straight from the atom state, <strong>without</strong>
+        intermediate <strong>transformations</strong>. The data is passed down
+        as <code>protonState</code> prop. Implements
+        <code>shouldComponentUpdate</code> by comparing immutable values.
+      </p>
+      <p>
+        <svg width="48" height="48" style="float:right;margin:-10px 0 0;">
+          <circle r="20" cx="24" cy="24" fill="#ab6fec" stroke="#242424" stroke-width="4"></circle>
+        </svg>
+        <a href="https://github.com/roman01la/f-react-kit/blob/master/src/lib/components/nuclear-component.jsx" target="blank_">nuclearComponent</a>
+        is basically a multi-proton component. It accepts multiple cursors and
+        puts data into <code>nuclearState</code> prop.
+        <code>shouldComponentUpdate</code> does comparison of each proton separately.
+      </p>
+
+      <h4>Libs</h4>
+      <ul>
+        <li><a href="http://swannodette.github.io/mori/" target="blank_">mori</a>’s persistent data structures</li>
+        <li>mori includes common functional bits, but if not enough use <a href="http://ramdajs.com/" target="blank_">Ramda</a></li>
+        <li><a href="http://visionmedia.github.io/page.js/" target="blank_">page.js</a> is a micro client-side router</li>
+      </ul>
+    </article>
+  </main>
+
+  <footer class="page-footer">
+    <small><a href="https://github.com/roman01la/f-react-kit">GitHub</a></small>
+  </footer>
 
 </body>
 </html>
