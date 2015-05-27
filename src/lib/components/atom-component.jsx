@@ -9,20 +9,15 @@ let atomComponent = function (Component, initialState, updateCallback) {
         constructor (props) {
 
             super(props);
-
-            /* Bootsrap applicaion state */
             atom.silentSwap(initialState);
         }
 
         componentWillMount() {
 
-            /* Re-render application on atom state change
-               and fire a callback with reference to the atom state
-            */
             atom.addChangeListener(() => {
 
-                updateCallback(atom.getState());
                 this.forceUpdate();
+                updateCallback(atom.getState());
             });
         }
 

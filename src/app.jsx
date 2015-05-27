@@ -13,14 +13,14 @@ import { flip } from './lib/functions';
 import page from 'page';
 import _ from 'mori';
 
-/* Route initialization helper */
+let saveState = _.partial(dispatch, 'STATE:SAVE');
+
 let addRoute = _.partial(flip(page), _.comp(
 
     _.partial(dispatch, 'PAGE:SET_CURRENT_PAGE'),
     _.partial((prop, obj) => obj[prop], 'path')
 ));
 
-/* Initialize router */
 addRoute('/');
 addRoute('/all');
 addRoute('/active');
@@ -28,13 +28,9 @@ addRoute('/completed');
 page({ hashbang: true });
 page(ToDoItemsStore.getCurrentPage());
 
-/* Persist initial state if there's no a stored one */
-!PersistenceStore.loadState() && PersistenceStore.saveState(_.toClj(initialState));
 
-/* Atomify root component with a state and persist the state on its change
-   ignore 'newToDo' field
- */
-let AtomicToDoApp = atomComponent(ToDoApp, PersistenceStore.loadState(),
-        state => dispatch('STATE:SAVE', _.updateIn(state, ['newToDo'], () => '')));
+!PersistenceStore.loadState() && saveState(_.toClj(initialState));
+
+let AtomicToDoApp = atomComponent(ToDoApp, PersistenceStore.loadState(), saveState);
 
 React.render(<AtomicToDoApp />, document.body);

@@ -13,32 +13,26 @@ let protonComponent = function (Component) {
             cursor: React.PropTypes.arrayOf(React.PropTypes.any)
         }
 
-        /* Set initial proton state */
         componentWillMount() {
 
             this._protonState = atom.getIn(this.props.cursor);
         }
 
-        /* Re-render component if proton state has been changed
-           and update proton state
-        */
         shouldComponentUpdate (nextProps) {
 
-            let currentProton = this._protonState,
-                nextProton = atom.getIn(nextProps.cursor);
+            let nextProtonState = atom.getIn(nextProps.cursor);
 
-            if (_.equals(currentProton, nextProton)) {
+            if (_.equals(this._protonState, nextProtonState)) {
 
                 return false;
             }
             else {
 
-                this._protonState = nextProton;
+                this._protonState = nextProtonState;
                 return true;
             }
         }
 
-        /* Get data as plain JS data structure */
         _getProtonState() {
 
             return _.toJs(this._protonState);
